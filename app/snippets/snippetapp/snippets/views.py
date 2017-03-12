@@ -1,7 +1,14 @@
 from django.shortcuts import get_object_or_404, render
+from django.views import generic
 from django.http import HttpResponse, Http404
 from .models import Snippet
 # Create your views here.
+
+# def index(request):
+#     snippets = Snippet.objects.all()
+#     context = {'snippets': snippets}
+#     return render(request, 'snippets/index.html', context)
+
 def add(request):
     if request.method == 'POST':
         # save dat data
@@ -13,6 +20,13 @@ def add(request):
         ).save()
 
     return render(request, 'snippets/add.html', {})
+
+def delete_snippet(request, pk):
+    snippet = Snippet.objects.get(pk=pk)
+    context = { 'snippet': snippet }
+    snippet.delete()
+
+    return render(request,'snippets/delete_snippet.html', context)
 
 def home(request):
     snippets = Snippet.objects.all()

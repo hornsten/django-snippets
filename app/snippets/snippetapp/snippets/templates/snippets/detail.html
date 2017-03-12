@@ -1,13 +1,10 @@
-{% extends 'snippets/base.html'%}
-
-{% block page_title%}Snippet Detail Page{%endblock%}
-
-{% block content %}
-    <li>Snippet Title: {{ snippet.title}}</li>
-    <li>Language: {{snippet.language }}</li>
-    <li>Description: {{ snippet.description }} </li>
-    <li>Snippet: <pre>
+{% extends 'snippets/base.html'%} {% block page_title%}Snippet Detail Page{%endblock%} {% block content %}
+<div class="container">
+    <h1>{{ snippet.title}} in {{snippet.language }}</h1>
+    <p>{{ snippet.description }} </p>
+    <pre>
       {{ snippet.snippet }}
-    </pre></li>
-
-{% endblock %}
+    </pre>
+    <a href="/">Go To Home Page</a>
+    <a href="/delete_snippet/{{snippet.pk}}">Delete Snippet</a> {% endblock %}
+</div>
