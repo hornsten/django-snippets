@@ -1,11 +1,7 @@
-{% extends 'snippets/base.html' %}
-
-{% block page_title %}Snippets home page {% endblock %}
-
-{% block content %}
-    <ul>
+{% extends 'snippets/base.html' %} {% block page_title %}Snippets home page {% endblock %} {% block content %}
+<ul>
     {% for snippet in snippets %}
-        <li>{{snippet.title}}</li>
+    <li><a href='detail/{{snippet.pk}}'>{{snippet.title}}</a></li>
     {% endfor %}
-    </ul>
+</ul>
 {% endblock %}
