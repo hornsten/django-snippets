@@ -1,0 +1,16 @@
+{% extends 'snippets/base.html'%}
+
+{% block page_title%}Add New Snippet {%endblock%}
+
+{% block content %}
+    <form method="POST" action="{% url 'snippets:add' %}">
+        <label>Title</label><input name="title">
+        <label>Language</label><input name="language">
+        <label>Description</label><input name="description">
+        <label>Snippet</label><input name="snippet">
+        <br />
+        <button type="submit">Save Dat Snipp</button>
+        {% csrf_token %}
+    </form>
+
+{% endblock %}
