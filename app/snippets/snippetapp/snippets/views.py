@@ -5,14 +5,6 @@ from django.http import HttpResponseRedirect, Http404
 from .models import Snippet
 from django.core.urlresolvers import reverse_lazy
 
-
-# Create your views here.
-
-# def index(request):
-#     snippets = Snippet.objects.all()
-#     context = {'snippets': snippets}
-#     return render(request, 'snippets/index.html', context)
-
 def add(request):
     if request.method == 'POST':
         # save dat data
@@ -24,17 +16,6 @@ def add(request):
         ).save()
 
     return render(request, 'snippets/add.html', {})
-
-# def update_snippet(request,pk):
-#
-#     Snippet(
-#         title=request.POST("title"),
-#         language=request.POST("language"),
-#         snippet=request.POST("snippet"),
-#         description=request.POST("description")
-#         ).save()
-#
-#     return render(request, 'snippets/home.html')
 
 def delete_snippet(request, pk):
     snippet = Snippet.objects.get(pk=pk)
@@ -52,6 +33,14 @@ class SnippetUpdate(UpdateView):
     model = Snippet
     fields = ['title','language','description','snippet']
     success_url = reverse_lazy('snippets:home')
+
+# class SnippetCreate(CreateView):
+#     model = Snippet
+#     fields = ['title','language','description','snippet']
+
+# class SnippetDelete(DeleteView):
+#     model = Snippet
+#     success_url = reverse_lazy('snippets:home')
 
 def detail(request, snippet_id):
     try:
