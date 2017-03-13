@@ -5,6 +5,28 @@
     <pre>
       {{ snippet.snippet }}
     </pre>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Update Snippet</h3>
+        </div>
+        <div class="panel-body">
+            <form action="/update_snippet/{{snippet.pk}}" method="POST" class="post-form">{% csrf_token %}
+                <div class="col-md-2 text-center"><input type="text" name="title" value={ {snippet.title }} maxlength='100' class="text-center" required /></div>
+                <div class="col-md-2 text-center"><input type="text" name="language" value={ { snippet.language }} maxlength='200' class="text-center" required/></div>
+                <div class="col-md-2 text-center"><input type="text" name="description" value={ { snippet.description }} maxlength='200' class="text-center" required/></div>
+                <div class="col-md-2 text-center"><input type="text" name="snippet" value={ { snippet.snippet }} maxlength='300' class="text-center" required/></div>
+                <div class="col-md-2 text-center"><button type="submit" class="btn btn-success save">Update</button></div>
+                <div class="col-md-2 text-center"></div>
+
+            </form>
+
+        </div>
+    </div>
+
     <a href="/">Go To Home Page</a>
+
+
     <a href="/delete_snippet/{{snippet.pk}}">Delete Snippet</a> {% endblock %}
+
 </div>

@@ -2,6 +2,7 @@
 <div class="container">
     <ul class="list-group">
         {% for snippet in snippets %}
+
         <a class="list-group-item list-group-item-info" href='detail/{{snippet.pk}}'>{{snippet.title}} in {{snippet.language}}</a> {% endfor %}
     </ul>
 

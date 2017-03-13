@@ -1,7 +1,10 @@
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
-from django.http import HttpResponse, Http404
+from django.http import HttpResponseRedirect, Http404
 from .models import Snippet
+from django.core.urlresolvers import reverse
+
+
 # Create your views here.
 
 # def index(request):
@@ -21,6 +24,17 @@ def add(request):
 
     return render(request, 'snippets/add.html', {})
 
+def update_snippet(request,pk):
+
+    Snippet(
+        title=request.POST("title"),
+        language=request.POST("language"),
+        snippet=request.POST("snippet"),
+        description=request.POST("description")
+        ).save()
+        
+    return render(request, 'snippets/home.html')
+
 def delete_snippet(request, pk):
     snippet = Snippet.objects.get(pk=pk)
     context = { 'snippet': snippet }
@@ -32,6 +46,10 @@ def home(request):
     snippets = Snippet.objects.all()
     context = {'snippets': snippets}
     return render(request, 'snippets/home.html', context)
+
+# class DetailView(generic.DetailView):
+#     model=Snippet
+#     template_name = 'snippets/detail.html'
 
 def detail(request, snippet_id):
     try:
