@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect, Http404
 from .models import Snippet
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 
 
 # Create your views here.
@@ -24,16 +25,16 @@ def add(request):
 
     return render(request, 'snippets/add.html', {})
 
-def update_snippet(request,pk):
-
-    Snippet(
-        title=request.POST("title"),
-        language=request.POST("language"),
-        snippet=request.POST("snippet"),
-        description=request.POST("description")
-        ).save()
-        
-    return render(request, 'snippets/home.html')
+# def update_snippet(request,pk):
+#
+#     Snippet(
+#         title=request.POST("title"),
+#         language=request.POST("language"),
+#         snippet=request.POST("snippet"),
+#         description=request.POST("description")
+#         ).save()
+#
+#     return render(request, 'snippets/home.html')
 
 def delete_snippet(request, pk):
     snippet = Snippet.objects.get(pk=pk)
@@ -47,9 +48,10 @@ def home(request):
     context = {'snippets': snippets}
     return render(request, 'snippets/home.html', context)
 
-# class DetailView(generic.DetailView):
-#     model=Snippet
-#     template_name = 'snippets/detail.html'
+class SnippetUpdate(UpdateView):
+    model = Snippet
+    fields = ['title','language','description','snippet']
+    success_url = reverse_lazy('snippets:home')
 
 def detail(request, snippet_id):
     try:
