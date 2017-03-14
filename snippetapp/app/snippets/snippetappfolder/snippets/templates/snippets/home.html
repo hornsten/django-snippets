@@ -1,0 +1,10 @@
+{% extends 'snippets/base.html' %} {% block page_title %}Snippet Saver {% endblock %} {% block content %}
+<div class="container">
+    <ul class="list-group">
+        {% for snippet in snippets %}
+
+        <a class="list-group-item list-group-item-info" href='detail/{{snippet.pk}}'>{{snippet.title}} in {{snippet.language}}</a> {% endfor %}
+    </ul>
+
+    <a href="add">Add a Snippet</a> {% endblock %}
+</div>

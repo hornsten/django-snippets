@@ -1,0 +1,20 @@
+{% extends 'snippets/base.html'%} {% block page_title%}Add New Snippet {%endblock%} {% block content %}
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add a Snippet</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form group" method="POST" action="{% url 'snippets:add' %}">
+                <label>Title</label><input class="form-control" name="title">
+                <label>Language</label><input class="form-control" name="language">
+                <label>Description</label><input class="form-control" name="description">
+                <label>Snippet</label><textarea class="form-control" name="snippet"></textarea>
+                <br />
+                <button class="btn btn-primary" type="submit">Save</button> {% csrf_token %}
+            </form>
+        </div>
+    </div>
+    <a href="{% url 'snippets:home' %}">Go To Home Page</a>
+</div>
+{% endblock %}
